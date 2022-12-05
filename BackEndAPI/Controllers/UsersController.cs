@@ -1,14 +1,13 @@
 using BackEndAPI.Data;
 using BackEndAPI.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEndAPI.Controllers
 {
-
-    [ApiController]
-    [Route("api/[controller]")] // GET /api/users 
-    public class UsersController : ControllerBase
+    [Authorize]
+    public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
 
@@ -17,6 +16,7 @@ namespace BackEndAPI.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet] //All users
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
