@@ -1,11 +1,4 @@
-using System.Text;
-using BackEndAPI.Data;
 using BackEndAPI.Extensions;
-using BackEndAPI.Interfaces;
-using BackEndAPI.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
