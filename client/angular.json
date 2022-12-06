@@ -26,8 +26,11 @@
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
-              "src/styles.css",
-              "./node_modules/bootswatch/dist/flatly/bootstrap.min.css"
+              "./node_modules/bootswatch/dist/zephyr/bootstrap.min.css",
+              "src/styles/toastr-styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/styles.css"
+             
             ],
             "scripts": []
           },
