@@ -29,7 +29,7 @@
               "./node_modules/bootswatch/dist/zephyr/bootstrap.min.css",
               "src/styles/toastr-styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "src/styles.css"
+              "src/styles/styles.css"
              
             ],
             "scripts": []
