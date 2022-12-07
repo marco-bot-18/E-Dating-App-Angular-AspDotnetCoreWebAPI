@@ -11,7 +11,5 @@ namespace BackEndAPI.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
-
-
     }
 }
