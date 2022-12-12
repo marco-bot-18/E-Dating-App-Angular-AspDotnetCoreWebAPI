@@ -15,19 +15,21 @@ builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-// if (builder.Environment.IsDevelopment())
-// {
-//     app.UseDeveloperExceptionPage();
-// }
+/*if (builder.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}*/
 
-//--- Configure the HTTP request pipeline and middlewares ---//
+/*
+    *Configure the HTTP request pipeline and middlewares
+*/
 
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(builder => builder
     .AllowAnyHeader()
     .AllowAnyMethod()
-    .WithOrigins("https://localhost:4200")); //to allow cross domain requests
+    .WithOrigins("https://localhost:4200")); /* to allow cross domain requests */
 
 app.UseHttpsRedirection();
 

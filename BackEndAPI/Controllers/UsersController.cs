@@ -1,11 +1,8 @@
 using AutoMapper;
-using BackEndAPI.Data;
 using BackEndAPI.DTOs;
-using BackEndAPI.Entities;
 using BackEndAPI.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BackEndAPI.Controllers
 {
