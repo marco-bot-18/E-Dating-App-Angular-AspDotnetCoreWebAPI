@@ -1,4 +1,5 @@
 using BackEndAPI.Data;
+using BackEndAPI.Helpers;
 using BackEndAPI.Interfaces;
 using BackEndAPI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,8 @@ namespace BackEndAPI.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+            services.AddScoped<IPhotoService, PhotoService>();
 
             return services;
         }

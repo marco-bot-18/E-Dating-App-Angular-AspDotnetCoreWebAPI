@@ -3,7 +3,7 @@
         <div class="col-4">
             <div class="card">
                 <img src="{{member.photoUrl || './assets/default-images/user.png'}}" alt="{{member.knownAs}}"
-                    class="card-mig-top img-thumbnail">
+                    class="card-img-top img-thumbnail">
                 <div class="card-body">
                     <div>
                         <strong>Location: </strong>
@@ -11,7 +11,10 @@
                     </div>
                     <div>
                         <strong>Gender: </strong>
-                        <p>{{member.gender | titlecase}}</p>
+                        <p *ngIf="member.gender == 'male'"><i class="fa-solid fa-mars"></i> {{ member.gender |
+                            titlecase}}</p>
+                        <p *ngIf="member.gender == 'female'"><i class="fa-solid fa-venus"></i> {{ member.gender |
+                            titlecase}}</p>
                     </div>
                     <div>
                         <strong>Age: </strong>

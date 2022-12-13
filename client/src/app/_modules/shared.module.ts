@@ -6,6 +6,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [],
@@ -15,17 +16,19 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule.forRoot({
       type: 'line-spin-clockwise-fade',
     }),
+    FileUploadModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
-      preventDuplicates: true, 
+      preventDuplicates: true,
     }),
   ],
   exports: [
     NgxGalleryModule,
     NgxSpinnerModule,
+    FileUploadModule,
     BsDropdownModule,
     TabsModule,
     ToastrModule,
