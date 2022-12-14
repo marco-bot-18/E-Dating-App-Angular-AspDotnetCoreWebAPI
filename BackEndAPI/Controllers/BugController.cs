@@ -2,7 +2,6 @@ using BackEndAPI.Data;
 using BackEndAPI.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 
 namespace BackEndAPI.Controllers
 {
@@ -27,8 +26,10 @@ namespace BackEndAPI.Controllers
         {
             AppUser thing = _context.Users.Find(-1);
 
-            if (thing == null) return NotFound();
-            return thing;
+            if (thing == null)
+                return NotFound();
+            else
+                return thing;
         }
 
         [HttpGet("server-error")]

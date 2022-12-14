@@ -2,6 +2,7 @@ namespace BackEndAPI.DTOs
 {
     public class MemberUpdateDto
     {
+        //public int Age { get; set; }
         public string Introduction { get; set; }
         public string LookingFor { get; set; }
 

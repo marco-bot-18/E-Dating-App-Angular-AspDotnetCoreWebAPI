@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
@@ -12,6 +14,7 @@ import { FileUploadModule } from 'ng2-file-upload';
   declarations: [],
   imports: [
     CommonModule,
+    BsDatepickerModule.forRoot(),
     NgxGalleryModule,
     NgxSpinnerModule.forRoot({
       type: 'line-spin-clockwise-fade',
@@ -26,6 +29,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     }),
   ],
   exports: [
+    BsDatepickerModule,
     NgxGalleryModule,
     NgxSpinnerModule,
     FileUploadModule,
