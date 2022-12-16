@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
+import { Member } from '../_models/member';
+import { MembersService } from '../_services/members.service';
+import { UserParams } from '../_models/userParams';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +14,6 @@ import { Title } from '@angular/platform-browser';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  //currentUser$: Observable<User | null> = of(null); //using rxjs
 
   constructor(
     public accountService: AccountService,
@@ -30,10 +32,7 @@ export class NavComponent implements OnInit {
         this.router.navigateByUrl('/members');
         console.log(response);
       },
-      error: (error) => {
-        //  this.toastr.error('Invalid Username of Password!', '');
-        console.log(error);
-      },
+      error: (error) => console.log(error),
     });
     console.log(this.model);
   }

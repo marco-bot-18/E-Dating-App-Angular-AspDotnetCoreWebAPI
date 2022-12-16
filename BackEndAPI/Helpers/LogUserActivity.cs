@@ -16,7 +16,7 @@ namespace BackEndAPI.Helpers
             var userId = resultContext.HttpContext.User.GetUserId();
 
             var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
-            var user = await repo.GetUserByIdAysnc(Convert.ToInt32(userId));
+            var user = await repo.GetUserByIdAysnc(userId);
             user.LastActive = DateTime.Now;
             await repo.SaveAllAsync();
         }
