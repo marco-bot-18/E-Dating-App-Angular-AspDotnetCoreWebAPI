@@ -17,6 +17,7 @@ namespace BackEndAPI.DTOs
 
         [Required] public string Country { get; set; }
 
+
         [Required]
         [StringLength(20, MinimumLength = 8)]
         public string Password { get; set; }

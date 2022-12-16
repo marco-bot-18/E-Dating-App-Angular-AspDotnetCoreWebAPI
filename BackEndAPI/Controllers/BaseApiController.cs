@@ -1,7 +1,9 @@
+using BackEndAPI.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BackEndAPI.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     [Route("api/[controller]")] // GET /api/users 
 

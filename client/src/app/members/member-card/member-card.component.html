@@ -1,4 +1,4 @@
-<div class="card mb-4" style="width: 23rem;" *ngIf="member">
+<div class="card mb-4" *ngIf="member">
     <div class="card-img-wrapper">
         <img src="{{member.photoUrl || './assets/default-images/user.png'}}" class="card-img-top"
             alt="{{member.knownAs}}">
@@ -18,7 +18,7 @@
     <div class="card-body">
         <h5 class="card-title">
             <i class="fa-solid fa-user"></i>
-            {{member.knownAs}}
+            {{member.knownAs}}, {{member.age}}
         </h5>
         <p class="card-text">{{member.city}}</p>
     </div>

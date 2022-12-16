@@ -6,6 +6,10 @@
                     class="card-img-top img-thumbnail">
                 <div class="card-body">
                     <div>
+                        <strong>Username: </strong>
+                        <p><i class="fa-solid fa-user"></i> {{member.userName}} </p>
+                    </div>
+                    <div>
                         <strong>Location: </strong>
                         <p><i class="fa-solid fa-location-pin"></i> {{member.city}}, {{member.country}}</p>
                     </div>
@@ -18,15 +22,15 @@
                     </div>
                     <div>
                         <strong>Age: </strong>
-                        <p>{{member.age}}</p>
+                        <p><i class="fa-solid fa-user-check"></i> {{member.age}}</p>
                     </div>
                     <div>
                         <strong>Last active:</strong>
-                        <p>{{member.lastActive}}</p>
+                        <p><i class="fa-solid fa-globe"></i> {{member.lastActive | timeago}}</p>
                     </div>
                     <div>
                         <strong>Member since: </strong>
-                        <p>{{member.created}}</p>
+                        <p><i class="fa-solid fa-hourglass-start"></i> {{member.created | date:'longDate'}}</p>
                     </div>
                 </div>
 

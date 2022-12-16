@@ -36,7 +36,7 @@
                     aria-expanded="false" dropdownToggle>
                     <img class="img-responsive rounded mx-1" alt="{{user.photoUrl}} || 'no-photo'"
                         src="{{user.photoUrl || './assets/default-images/user.png'}}">
-                    Welcome, {{user.username | titlecase}}
+                    Welcome, {{user.knownAs}}
                 </a>
                 <div class="dropdown-menu mt-4" *dropdownMenu>
                     <a class="dropdown-item" routerLink="member/edit">My Profile</a>
