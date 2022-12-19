@@ -9,8 +9,10 @@
             <ul class="navbar-nav me-auto">
                 <ng-container *ngIf="accountService.currentUser$ | async">
                     <li class="nav-item">
-                        <a class="nav-link" routerLink="/members" routerLinkActive="active"><i
-                                class="fa-solid fa-heart"></i> Matches</a>
+                        <a class="nav-link" routerLink="/members" routerLinkActive="active"
+                            [routerLinkActiveOptions]="{exact: true}">
+                            <i class="fa-solid fa-heart"></i> Matches
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" routerLink="/lists" routerLinkActive="active">

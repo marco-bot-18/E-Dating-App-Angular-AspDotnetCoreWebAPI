@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row mb-3" *ngIf="member">
+    <div class="row mb-3">
         <div class="col-4">
             <div class="card">
                 <img src="{{member.photoUrl || './assets/default-images/user.png'}}" alt="{{member.knownAs}}"
@@ -37,73 +37,32 @@
                 <div class="card-footer">
                     <div class="btn-group d-flex">
                         <button class="btn btn-primary"><i class="fa fa-heart"></i> Like</button>
-                        <button class="btn btn-success"><i class="fa fa-envelope"></i> Message</button>
+                        <button (click)="selectTab('Messages')" class="btn btn-success"><i class="fa fa-envelope"></i>
+                            Message</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-8">
-            <tabset class="member-tabset">
-                <tab heading="About {{member.knownAs}}">
+            <tabset class="member-tabset" #memberTabs>
+                <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)">
                     <h4>Description</h4>
                     <p>{{member.introduction}}</p>
                     <h4>Looking for</h4>
                     <p>{{member.lookingFor}}</p>
                 </tab>
-                <tab heading="About">
+                <tab heading="Interests" (selectTab)="onTabActivated($event)">
                     <h4>Interests</h4>
                     <p>{{member.interests}}</p>
                 </tab>
-                <tab heading="Photos">
+                <tab heading="Photos" (selectTab)="onTabActivated($event)">
                     <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
                 </tab>
-                <tab heading="Messages">
-                    <p>Messages will go here!</p>
+                <tab heading="Messages" (selectTab)="onTabActivated($event)">
+                    <app-member-messages [messages]="messages" [username]="member.userName"></app-member-messages>
                 </tab>
             </tabset>
         </div>
     </div>
 </div>
-
-
-<!-- <div class="container">
-    <section class="mx-auto my-5" style="max-width: 30rem" *ngIf="member">
-        <div class="card testimonial-card mt-2 mb-3">
-            <div class="card-up aqua-gradient"></div>
-            <div class="avatar mx-auto white mt-2">
-
-            </div>
-            <img src="{{member.photoUrl || './assets/user.png'}}" class="card-img-top" alt="{{member.knownAs}}"
-                class="card-mig-top img-thumbnail">
-            <div class="card-body">
-                <div>
-                    <strong>Location: </strong>
-                    <p><i class="fa-solid fa-location-pin"></i> {{member.city}}, {{member.country}}</p>
-                </div>
-                <div>
-                    <strong>Gender: </strong>
-                    <p>{{member.gender | titlecase}}</p>
-                </div>
-                <div>
-                    <strong>Age: </strong>
-                    <p>{{member.age}}</p>
-                </div>
-                <div>
-                    <strong>Last active:</strong>
-                    <p>{{member.lastActive}}</p>
-                </div>
-                <div>
-                    <strong>Member since: </strong>
-                    <p>{{member.created}}</p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group d-flex">
-                    <button class="btn btn-primary"><i class="fa fa-heart"></i> Like</button>
-                    <button class="btn btn-success"><i class="fa fa-envelope"></i> Message</button>
-                </div>
-            </div>
-        </div>
-    </section>
-</div> -->
