@@ -26,6 +26,7 @@ namespace BackEndAPI.Controllers
         }
 
         //[AllowAnonymous] //- test the API in postman without this data annotation
+        // [Authorize(Roles = "Admin")]
         [HttpGet] //All users
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
@@ -44,6 +45,7 @@ namespace BackEndAPI.Controllers
             return Ok(users);
         }
 
+        // [Authorize(Roles = "Member")]
         [HttpGet("{username}")] //Single user
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
@@ -96,7 +98,6 @@ namespace BackEndAPI.Controllers
             }
             else
                 return BadRequest("There's a problem in adding photo!");
-
         }
 
         [HttpPut("set-main-photo/{photoId}")]

@@ -24,6 +24,11 @@
                             <i class="fa-solid fa-message"></i> Messages
                         </a>
                     </li>
+                    <li class="nav-item" *appHasRole="['Admin', 'Moderator']">
+                        <a class="nav-link" routerLink="/admin" routerLinkActive="active">
+                            <i class="fa-solid fa-user-tie"></i> Admin
+                        </a>
+                    </li>
                 </ng-container>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/errors" routerLinkActive="active">
