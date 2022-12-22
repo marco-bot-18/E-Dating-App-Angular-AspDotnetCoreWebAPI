@@ -2,6 +2,7 @@ using BackEndAPI.Data;
 using BackEndAPI.Entities;
 using BackEndAPI.Extensions;
 using BackEndAPI.Middleware;
+using BackEndAPI.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(builder => builder
     .AllowAnyHeader()
     .AllowAnyMethod()
+    .AllowCredentials()
     .WithOrigins("https://localhost:4200")); /* to allow cross domain requests */
 
 app.UseHttpsRedirection();
@@ -39,6 +41,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 
 //for seeding data into the database
 using var scope = app.Services.CreateScope();
@@ -51,6 +56,7 @@ try
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
 
     await context.Database.MigrateAsync();
+    await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]"); //TRUNCATE TABLE is OK also
     await Seed.SeedUsers(userManager, roleManager);
 }
 catch (Exception ex)

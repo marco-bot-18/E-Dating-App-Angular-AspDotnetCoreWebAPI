@@ -2,6 +2,7 @@ using BackEndAPI.Data;
 using BackEndAPI.Helpers;
 using BackEndAPI.Interfaces;
 using BackEndAPI.Services;
+using BackEndAPI.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BackEndAPI.Extensions
@@ -24,6 +25,8 @@ namespace BackEndAPI.Extensions
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikesRepository, LikesRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddSignalR();
+            services.AddSingleton<PresenceTracker>();
 
             return services;
         }

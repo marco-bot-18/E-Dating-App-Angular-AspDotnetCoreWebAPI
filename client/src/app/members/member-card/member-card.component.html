@@ -20,7 +20,10 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">
-            <i class="fa-solid fa-user"></i>
+            <span [class.is-online]="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                <i class="fa-solid fa-user"></i>
+            </span>
+
             {{member.knownAs}}, {{member.age}}
         </h5>
         <p class="card-text">{{member.city}}</p>

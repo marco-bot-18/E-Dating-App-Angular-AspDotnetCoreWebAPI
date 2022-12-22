@@ -26,7 +26,7 @@ namespace BackEndAPI.Data
             query = query.Where(u => u.Gender == userParams.Gender);
 
             var minBdate = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
-            var maxBdate = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge - 1));
+            var maxBdate = DateOnly.FromDateTime(DateTime.Today.AddYears(userParams.MinAge - 1)); //I removed the "-" in "MinAge" 1 to include the age of 18 
 
             query = query.Where(u => u.DateOfBirth >= minBdate && u.DateOfBirth <= maxBdate);
 

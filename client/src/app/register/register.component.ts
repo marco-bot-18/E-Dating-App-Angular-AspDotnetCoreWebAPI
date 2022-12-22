@@ -72,6 +72,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     //console.log(this.registerForm?.value);
+
     const dob = this.getDateOnly(
       this.registerForm.controls['dateOfBirth'].value
     );
@@ -86,7 +87,7 @@ export class RegisterComponent implements OnInit {
       },
       complete: () => {
         console.log('Register Success!');
-        console.log(values);
+        //console.log(values);
       },
     });
   }

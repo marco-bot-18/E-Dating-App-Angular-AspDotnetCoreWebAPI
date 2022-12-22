@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { NgxGalleryOptions } from '@kolkov/ngx-gallery';
@@ -8,25 +8,34 @@ import { NgxGalleryAnimation } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { MessageService } from 'src/app/_services/message.service';
 import { Message } from 'src/app/_models/messages';
+import { PresenceService } from 'src/app/_services/presence.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-member-details',
   templateUrl: './member-details.component.html',
   styleUrls: ['./member-details.component.css'],
 })
-export class MemberDetailsComponent implements OnInit {
+export class MemberDetailsComponent implements OnInit, OnDestroy {
   @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
   member: Member = {} as Member;
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
   activeTab?: TabDirective;
   messages: Message[] = [];
+  user?: User;
 
   constructor(
-    private memberService: MembersService,
+    private accountService: AccountService,
     private route: ActivatedRoute,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    public presenceService: PresenceService,
+    private router: Router
+  ) {
+    this.accountServiceCurrentUser();
+  }
 
   ngOnInit(): void {
     // this.loadMember();
@@ -36,6 +45,20 @@ export class MemberDetailsComponent implements OnInit {
 
     this.getRouteParams();
     this.thisGalleryOptions();
+  }
+
+  ngOnDestroy(): void {
+    this.messageService.stopHubConnection();
+  }
+
+  accountServiceCurrentUser() {
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: (user) => {
+        if (user) this.user = user;
+      },
+    });
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   thisGalleryOptions() {
@@ -75,19 +98,6 @@ export class MemberDetailsComponent implements OnInit {
     return imageUrls;
   }
 
-  // loadMember() {
-  //   const username = this.route.snapshot.paramMap.get('username');
-
-  //   if (!username) return;
-  //   else
-  //     this.memberService.getMember(username).subscribe({
-  //       next: (member) => {
-  //         this.member = member;
-  //         this.galleryImages = this.getImages();
-  //       },
-  //     });
-  // }
-
   selectTab(heading: string) {
     if (this.memberTabs) {
       this.memberTabs.tabs.find((x) => x.heading === heading)!.active = true;
@@ -105,8 +115,11 @@ export class MemberDetailsComponent implements OnInit {
 
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
-    if (this.activeTab.heading === 'Messages') {
-      this.loadMessages();
+    if (this.activeTab.heading === 'Messages' && this.user) {
+      // this.loadMessages();
+      this.messageService.createHubConnection(this.user, this.member.userName);
+    } else {
+      this.messageService.stopHubConnection();
     }
   }
 }

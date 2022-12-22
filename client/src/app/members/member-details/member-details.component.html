@@ -5,6 +5,9 @@
                 <img src="{{member.photoUrl || './assets/default-images/user.png'}}" alt="{{member.knownAs}}"
                     class="card-img-top img-thumbnail">
                 <div class="card-body">
+                    <div class="mb-3" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.userName)">
+                        <i class="fa-solid fa-globe text text-success is-online"></i> Online Now
+                    </div>
                     <div>
                         <strong>Username: </strong>
                         <p><i class="fa-solid fa-user"></i> {{member.userName}} </p>
@@ -60,7 +63,7 @@
                     <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
                 </tab>
                 <tab heading="Messages" (selectTab)="onTabActivated($event)">
-                    <app-member-messages [messages]="messages" [username]="member.userName"></app-member-messages>
+                    <app-member-messages [username]="member.userName"></app-member-messages>
                 </tab>
             </tabset>
         </div>
