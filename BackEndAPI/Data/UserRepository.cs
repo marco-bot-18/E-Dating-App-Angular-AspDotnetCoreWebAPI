@@ -70,14 +70,22 @@ namespace BackEndAPI.Data
                 .ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
+        // public async Task<bool> SaveAllAsync()
+        // {
+        //     return await _context.SaveChangesAsync() > 0;
+        // }
 
         public void Update(AppUser appUser)
         {
             _context.Entry(appUser).State = EntityState.Modified;
+        }
+
+        public async Task<string> GetUserGender(string username)
+        {
+            return await _context.Users
+                .Where(u => u.UserName == username)
+                .Select(g => g.Gender)
+                .FirstOrDefaultAsync();
         }
     }
 }

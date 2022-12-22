@@ -6,6 +6,7 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'login', component: LoginPageComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'errors', component: TestErrorComponent },

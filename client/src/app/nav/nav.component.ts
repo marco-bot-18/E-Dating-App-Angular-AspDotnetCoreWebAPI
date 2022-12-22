@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, TitleStrategy } from '@angular/router';
 import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { Title } from '@angular/platform-browser';
@@ -30,9 +30,12 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/members');
-        console.log(response);
+        this.model = {};
+        window.location.reload();
+        //console.log(response);
       },
       error: (error) => console.log(error),
+      // complete: () => window.location.reload(),
     });
     console.log(this.model);
   }

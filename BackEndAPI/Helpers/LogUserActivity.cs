@@ -15,10 +15,10 @@ namespace BackEndAPI.Helpers
 
             var userId = resultContext.HttpContext.User.GetUserId();
 
-            var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
-            var user = await repo.GetUserByIdAysnc(userId);
-            user.LastActive = DateTime.Now;
-            await repo.SaveAllAsync();
+            var uow = resultContext.HttpContext.RequestServices.GetRequiredService<IUnitOfWork>();
+            var user = await uow.UserRepository.GetUserByIdAysnc(userId);
+            user.LastActive = DateTime.UtcNow;
+            await uow.Complete();
         }
     }
 }

@@ -1,0 +1,44 @@
+<!-- <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" class="d-flex justify-content-end"
+    (ngSubmit)="login()" autocomplete="off">
+    <input name="username" [(ngModel)]="model.username" class="form-control me-sm-2" type="text" placeholder="Username">
+    <input name="password" [(ngModel)]="model.password" class="form-control me-sm-2" type="password"
+        placeholder="Password">
+    <button class="btn btn-success outline my-2 my-sm-0" type="submit">Login</button>
+</form> -->
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-10">
+            <div class="wrap d-flex">
+                <div
+                    class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last custom-card-layout">
+                </div>
+                <div class="login-form">
+                    <div class="form-card">
+                        <form *ngIf="!(accountService.currentUser$ | async)" #loginForm="ngForm" (ngSubmit)="login()"
+                            autocomplete="off">
+                            <div class="text-center">
+                                <img class="mb-4 app-logo"
+                                    src="https://i.pinimg.com/564x/70/61/60/7061607fe000d745ac0bd7118b49354a.jpg"
+                                    alt="AppLogo" width="72" height="70">
+                            </div>
+
+                            <div class="form-floating mb-2">
+                                <input name="username" [(ngModel)]="model.username" class="form-control" type="text"
+                                    placeholder="Username" id="floatingInput">
+                                <label for="floatingInput">Username</label>
+                            </div>
+                            <div class="form-floating">
+                                <input name="password" [(ngModel)]="model.password" class="form-control mb-2"
+                                    type="password" placeholder="Password" id="floatingPassword">
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <button class="w-100 btn btn-lg btn-success" type="submit">Login</button>
+                            <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
