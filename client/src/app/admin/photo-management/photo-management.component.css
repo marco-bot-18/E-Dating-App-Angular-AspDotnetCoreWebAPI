@@ -1,0 +1,13 @@
+img.img-thumbnail {
+    height: 175px;
+    min-width: 175px !important;
+    margin-bottom: 2px;
+    align-self: center;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+  }

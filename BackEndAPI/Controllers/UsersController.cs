@@ -6,6 +6,7 @@ using BackEndAPI.Entities;
 using BackEndAPI.Extensions;
 using BackEndAPI.Helpers;
 using BackEndAPI.Interfaces;
+using BackEndAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,7 +50,11 @@ namespace BackEndAPI.Controllers
         [HttpGet("{username}")] //Single user
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _uow.UserRepository.GetMemberAsync(username);
+            var currentUsername = User.GetUsername();
+            return await _uow.UserRepository.GetMemberAsync(username,
+            isCurrentUser: currentUsername == username
+            );
+            //return await _uow.UserRepository.GetMemberAsync(username);
         }
 
         [HttpPut]
@@ -72,32 +77,23 @@ namespace BackEndAPI.Controllers
         public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
         {
             var user = await _uow.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-
-            if (user == null)
-                return NotFound();
-
             var result = await _photoService.AddPhotoAsync(file);
-
-            if (result.Error != null)
-                return BadRequest(result.Error.Message);
-
+            if (result.Error != null) return BadRequest(result.Error.Message);
             var photo = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId
             };
-
-            if (user.Photos.Count == 0)
-                photo.IsMain = true;
             user.Photos.Add(photo);
-
             if (await _uow.Complete())
             {
-                return CreatedAtAction(nameof(GetUser),
-                    new { username = user.UserName }, _mapper.Map<PhotoDto>(photo)); //status code: 201
+                return CreatedAtRoute("GetUser", new
+                {
+                    username = user.UserName
+                },
+                 _mapper.Map<PhotoDto>(photo));
             }
-            else
-                return BadRequest("There's a problem in adding photo!");
+            return BadRequest("Problem addding photo");
         }
 
         [HttpPut("set-main-photo/{photoId}")]
@@ -126,7 +122,6 @@ namespace BackEndAPI.Controllers
         }
 
         [HttpDelete("delete-photo/{photoId}")]
-
         public async Task<ActionResult> DeletePhoto(int photoId)
         {
             var user = await _uow.UserRepository.GetUserByUsernameAsync(User.GetUsername());
@@ -152,6 +147,5 @@ namespace BackEndAPI.Controllers
             else
                 return BadRequest("There's a problem deleting the photo!");
         }
-
     }
 }

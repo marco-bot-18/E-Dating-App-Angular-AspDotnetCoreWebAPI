@@ -1,4 +1,4 @@
-<div class="text-center mt-3">
+<div class="text-center" style="margin-top: 100px;">
     <h2>{{predicate === 'liked' ? 'Users I liked' : 'Users Who Liked Me'}}</h2>
 </div>
 
@@ -19,11 +19,17 @@
             <app-member-card [member]="member"></app-member-card>
         </div>
     </div>
+
+    <div class="row" *ngIf="!members || members.length === 0">
+        <h3>No Users</h3>
+    </div>
 </div>
+
 
 <hr>
 
-<div class="d-flex justify-content-center" *ngIf="pagination">
+
+<div class="d-flex justify-content-center" *ngIf="pagination && members && members.length > 0">
     <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
         [maxSize]="10" [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
         nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">

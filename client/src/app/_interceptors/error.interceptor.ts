@@ -37,7 +37,8 @@ export class ErrorInterceptor implements HttpInterceptor {
               break;
 
             case 401:
-              this.toastr.error('Unauthorized!', error.status.toString());
+              //this.toastr.error('Unauthorized!', error.status.toString());
+              this.toastr.error('', 'Incorrect Username or Password!');
               break;
 
             case 404:

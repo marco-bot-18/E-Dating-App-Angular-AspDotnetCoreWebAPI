@@ -1,14 +1,21 @@
-<div class="row mb-5" *ngIf="member">
+<div class="row mb-5" *ngIf="member" style="margin-top: 20px;">
     <div class="col-4 mb-3" *ngFor="let photo of member.photos">
-        <img src="{{photo.url}}" alt="User's Photo" class="img-thumbnail mb-1">
-
         <div class="text-center">
-            <div class="btn-group">
-                <button [disabled]="photo.isMain" (click)="setMainPhoto(photo)" class="btn btn-sm"
+            <div class="img-wrapper">
+                <img src="{{photo.url}}" alt="{{photo.url}}" class="img-thumbnail p-1"
+                    [class.not-approved]="!photo.isApproved">
+
+                <div class="text-center img-text" *ngIf="!photo.isApproved">
+                    <span class="text-danger">Awaiting approval</span>
+                </div>
+            </div>
+            <div class="btn-group d-inline-flex mt-2">
+                <button [disabled]="photo.isMain || !photo.isApproved" (click)="setMainPhoto(photo)" class="btn btn-sm"
                     [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success'">
                     Set as Main Photo
                 </button>
-                <button class="btn btn-sm btn-danger" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)">
+                <button class="btn btn-sm btn-danger" [disabled]="photo.isMain || !photo.isApproved"
+                    (click)="deletePhoto(photo.id)">
                     <i class="fa-solid fa-trash"></i> <!-- Delete Photo -->
                 </button>
             </div>

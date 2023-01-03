@@ -7,8 +7,7 @@
   padding: 3px;
 }
 
-
-/* tabs */
+/* tabs */  
 .tab-panel {
   border: 1px solid #ddd;
   padding: 10px;
@@ -17,14 +16,14 @@
 
 .nav-tabs>li.open,
 .member-tabset>.nav-tabs>li:hover {
-  border-bottom: 3px solid rgba(52, 89, 230, .7);
+  border-bottom: 5px solid rgba(52, 89, 230, .7);
 }
 
 .member-tabset>.nav-tabs>li.open>a,
 .member-tabset>.nav-tabs>li:hover>a {
   border: 0;
   background: none !important;
-  color: rgb(52, 89, 230);
+  color: #3459e6;
 }
 
 .member-tabset>.nav-tabs>li.open>a>i,
@@ -38,7 +37,7 @@
 }
 
 .member-tabset>.nav-tabs>li.active {
-  border-bottom: 4px solid #3459e6;
+  border-bottom: 5px solid #3459e6;
   position: relative;
 }
 

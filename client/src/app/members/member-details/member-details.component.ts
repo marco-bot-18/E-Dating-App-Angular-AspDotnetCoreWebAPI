@@ -58,7 +58,7 @@ export class MemberDetailsComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false
   }
 
   thisGalleryOptions() {

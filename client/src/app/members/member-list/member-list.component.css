@@ -1,3 +1,19 @@
 .range-age-label {
-    width: 70px;
+  width: 70px;
+}
+/* .pagination {
+    color: rgb(47,179,128);
+} */
+
+.page-item.active .page-link {
+    background-color: red;
+    border-color: red;
+}
+
+.page-link {
+    color: red; 
+}
+
+.page-link:hover {
+    color: red; 
 }
