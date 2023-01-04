@@ -43,7 +43,6 @@ export class MembersService {
   }
 
   resetUserParams() {
-    
     if (this.user) {
       this.userParams = new UserParams(this.user);
       return this.userParams;

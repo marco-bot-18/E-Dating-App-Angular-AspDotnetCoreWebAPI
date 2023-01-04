@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
@@ -12,6 +12,9 @@ import { PresenceService } from 'src/app/_services/presence.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { take } from 'rxjs';
+import { MemberCardComponent } from '../member-card/member-card.component';
+import { ToastrService } from 'ngx-toastr';
+import { LikeService } from 'src/app/_services/like.service';
 
 @Component({
   selector: 'app-member-details',
@@ -19,6 +22,7 @@ import { take } from 'rxjs';
   styleUrls: ['./member-details.component.css'],
 })
 export class MemberDetailsComponent implements OnInit, OnDestroy {
+  @Input() memberUndefined: Member | undefined;
   @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent;
   member: Member = {} as Member;
   galleryOptions: NgxGalleryOptions[] = [];
@@ -28,6 +32,8 @@ export class MemberDetailsComponent implements OnInit, OnDestroy {
   user?: User;
 
   constructor(
+    private likeService: LikeService,
+    private toastr: ToastrService,
     private accountService: AccountService,
     private route: ActivatedRoute,
     private messageService: MessageService,
@@ -38,7 +44,6 @@ export class MemberDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.loadMember();
     this.route.data.subscribe({
       next: (data) => (this.member = data['member']),
     });
@@ -58,7 +63,7 @@ export class MemberDetailsComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   thisGalleryOptions() {
@@ -111,6 +116,10 @@ export class MemberDetailsComponent implements OnInit, OnDestroy {
         complete: () => console.log(this.messages),
       });
     }
+  }
+
+  addLike(member: Member) {
+    this.likeService.addLike(member);
   }
 
   onTabActivated(data: TabDirective) {

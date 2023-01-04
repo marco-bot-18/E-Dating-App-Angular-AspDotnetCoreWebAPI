@@ -103,7 +103,7 @@ namespace BackEndAPI.Controllers
             if (user == null)
                 return NotFound();
 
-            var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+            var photo = await _uow.PhotoRepository.GetPhotoById(photoId);
             if (photo == null)
                 return NotFound();
 
