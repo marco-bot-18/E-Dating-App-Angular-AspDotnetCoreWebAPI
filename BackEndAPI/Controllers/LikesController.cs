@@ -60,6 +60,5 @@ namespace BackEndAPI.Controllers
 
             return Ok(users);
         }
-
     }
 }
