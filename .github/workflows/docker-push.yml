@@ -21,7 +21,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: "{{defaultContext}}:API"
+          context: "{{defaultContext}}:BackEndAPI"
           push: true
           tags: dnielmrco/datingapp:latest
   deploy:
