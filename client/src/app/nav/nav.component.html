@@ -4,8 +4,9 @@
             *ngIf="!(accountService.currentUser$ | async) as user">Thunder</a>
         <a class="navbar-brand nav-item" routerLink="/members" routerLinkActive="active"
             *ngIf="(accountService.currentUser$ | async) as user">Thunder</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <button [hidden]="!(accountService.currentUser$ | async)" class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+            aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor01">

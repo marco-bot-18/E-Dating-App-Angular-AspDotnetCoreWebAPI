@@ -1,4 +1,4 @@
-<div class="container" style="margin-top: 100px;">
+<div class="container-fluid" style="margin-top: 90px;">
     <div *ngIf="!registerMode" class="text-center">
         <h1>Find your match</h1>
         <p class="lead">Come on in to view your matches... all you need to do is sign up!</p>
@@ -10,11 +10,7 @@
     </div>
 
     <div *ngIf="registerMode" class="container">
-        <div class="row justify-content-center">
-            <div class="col-4">
-                <app-register (cancelRegister)="cancelRegisterMode($event)">
-                </app-register>
-            </div>
-        </div>
+        <app-register (cancelRegister)="cancelRegisterMode($event)">
+        </app-register>
     </div>
 </div>
